@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>Learning Vue</title>
+    <style>
+        li span.fav {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(book, index) in books">
+                <span :class="{fav: book.isFav}" @click="toggleFav($event, index)">{{ book.title }}</span>
+            </li>
+        </ul>
+        <button v-on:click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+    </div>
+    <script src="app.js" type="module"></script>
+</body>
+
+</html>
