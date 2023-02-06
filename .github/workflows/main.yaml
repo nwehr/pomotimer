@@ -15,16 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@master
         with:
           persist-credentials: false
 
-      - name: Install 🔧
-        run: yarn install
+      - name: Install
+        run: yarn
 
-      - name: Lint 🧐
-        run: yarn lint:check
-
-      - name: Build 🏗️
+      - name: Build
         run: yarn build
+        env:
+            NODE_ENV: production
+
+      - name: Deploy to GH Pages
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
